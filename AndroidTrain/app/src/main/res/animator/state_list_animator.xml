@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--视图状态改变启动的Animator-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <set>
+            <objectAnimator android:propertyName="translateX"
+                android:duration="@android:integer/config_shortAnimTime"
+                android:valueTo="2dp"
+                android:valueType="floatType"/>
+            <!--此处是一个动画集合-->
+        </set>
+    </item>
+    <item android:state_enabled="true">
+        <set>
+            <objectAnimator android:propertyName="translateX"
+                android:duration="100"
+                android:valueTo="0"
+                android:valueType="floatType"/>
+        </set>
+    </item>
+</selector>

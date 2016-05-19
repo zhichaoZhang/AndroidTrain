@@ -1,21 +1,22 @@
 package com.zzc.androidtrain;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
 
 public class ViewPagerActivity extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_viewpager);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +61,18 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
         });
 
+        //--------ActionBar+Viewpager导航方式
+        //在ActionBar上添加对应数量的tab,此种方式已经被废弃
+        ActionBar actionBar = getSupportActionBar();
+        for (int i = 0; i < 3; i++) {
+        }
+        //-------pagerTitleStrip+ViewPager导航方式
+        //-------PagerTitleStrip是一个关于当前页,下一页,上一页的非交互的指示器
+        PagerTitleStrip pagerTitleStrip = (PagerTitleStrip)findViewById(R.id.pager_title_strip);
+
+        //------PagerTabStrip+ViewPager导航方式
+        //和PagerTitleStrip相比,PagerTabStrip是可交互,并在当前Tab下有横线指示
+        PagerTabStrip pagerTabStrip = (PagerTabStrip)findViewById(R.id.pager_tab_strip);
     }
 
 
@@ -113,7 +126,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main2, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_viewpager_item, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
@@ -140,7 +153,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 5;
         }
 
         @Override
@@ -152,6 +165,10 @@ public class ViewPagerActivity extends AppCompatActivity {
                     return "SECTION 2";
                 case 2:
                     return "SECTION 3";
+                case 3:
+                    return "SECTION 4";
+                case 4:
+                    return "SECTION 5";
             }
             return null;
         }

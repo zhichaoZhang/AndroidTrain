@@ -10,6 +10,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true//使用vector drawable特性需添加此属性
     }
     buildTypes {
         release {
@@ -17,13 +18,37 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore.jks")
+            storePassword "androidtrain"
+            keyAlias "release"
+            keyPassword "androidtrain"
+        }
+        release {
+            storeFile file("../keystore.jks")
+            storePassword "androidtrain"
+            keyAlias "release"
+            keyPassword "androidtrain"
+
+        }
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:design:23.2.1'
-    compile 'com.android.support:support-v4:23.2.1'
-    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:support-vector-drawable:23.4.0'
+    compile 'com.android.support:animated-vector-drawable:23.4.0'
+    compile 'com.zzc.qrcodescan.zxing:qrcodescan:1.0.1'
 }

@@ -32,6 +32,22 @@
         <item>-1</item>
     </string-array>
 
+    <string name="pref_title_font_size">Set Font Size</string>
+
+    <string-array name="pref_font_size_list_titles">
+        <item>small</item>
+        <item>normal</item>
+        <item>large</item>
+        <item>extra large</item>
+    </string-array>
+
+    <string-array name="pref_font_size_list_values">
+        <item>0.5f</item>
+        <item>1.0f</item>
+        <item>2.0f</item>
+        <item>3.0f</item>
+    </string-array>
+
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
 
@@ -66,7 +82,7 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_viewpager">ViewPager导航</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_login">Sign in</string>
 
@@ -82,4 +98,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_setting">Setting</string>
+    <string name="title_activity_print">Print</string>
+    <string name="title_activity_bug">bug页面</string>
 </resources>

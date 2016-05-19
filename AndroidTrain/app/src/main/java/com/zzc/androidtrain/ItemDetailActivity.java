@@ -1,15 +1,19 @@
 package com.zzc.androidtrain;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * An activity representing a single Item detail screen. This
@@ -79,5 +83,51 @@ public class ItemDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 创建一个单独任务栈的通知页面
+     *
+     * @param view
+     */
+    public void createNewTaskNotification(View view) {
+        int notiId = 2;
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
+        Intent resultIntent = new Intent(this, ItemDetailActivity.class);
+        resultIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+//        taskStackBuilder.addParentStack(ItemDetailActivity.class);
+//        taskStackBuilder.addNextIntent(resultIntent);
+//        PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        builder.setContentTitle("标题").setContentInfo("内容").setSmallIcon(R.drawable.ic_launcher).setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(notiId, builder.build());
+    }
+
+    /**
+     * 创建位于app任务栈的通知页面
+     *
+     * @param view
+     */
+    public void createCurrentTaskNotification(View view) {
+
+        int notiId = 1;
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext());
+
+        Intent resultIntent = new Intent(this, ItemDetailActivity.class);
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
+        taskStackBuilder.addParentStack(ItemDetailActivity.class);
+        taskStackBuilder.addNextIntent(resultIntent);
+        PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        builder.setContentTitle("标题").setContentInfo("内容").setSmallIcon(R.drawable.ic_launcher).setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(notiId, builder.build());
+
+
     }
 }

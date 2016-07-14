@@ -12,6 +12,7 @@ import com.zzc.androidtrain.common.FontManger;
 import com.zzc.androidtrain.util.StatusBarUtil;
 
 /**
+ *
  * Created by zczhang on 16/4/5.
  */
 public class BaseActivity extends AppCompatActivity {
@@ -24,6 +25,18 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: " + getClass().getSimpleName());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: " + getClass().getSimpleName());
     }
 
     @Override

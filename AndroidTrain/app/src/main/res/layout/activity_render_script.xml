@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.zzc.androidtrain.renderscript.RenderScriptActivity">
+
+    <ImageView
+        android:id="@+id/iv_renderscript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="高斯模糊"
+        android:onClick="onBlurBtnClick"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RenderScript提供的ScriptIntrinsicBlur有最大值(25)的限制,如果需要比较重的模糊,需要重复几次."
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速模糊(Java实现)"
+        android:onClick="onFastBlurBtnClick"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速模糊(C实现处理像素)"
+        android:onClick="onFastBlurCPixels"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="快速模糊(C实现处理Bitmap)"
+        android:onClick="onFastBlurCBitmap"
+        />
+</LinearLayout>

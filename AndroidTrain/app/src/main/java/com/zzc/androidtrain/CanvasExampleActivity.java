@@ -12,11 +12,13 @@ import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class CanvasExampleActivity extends AppCompatActivity {
+    private static final String TAG = "CanvasExampleActivity";
     RelativeLayout rlContainer;
     ImageView ivCanvas;
 
@@ -53,11 +55,11 @@ public class CanvasExampleActivity extends AppCompatActivity {
         Canvas canvas = new Canvas(bitmap);
         Paint paint = new Paint();
         paint.setColor(Color.GRAY);
-        paint.setShadowLayer(10, 10, 10, Color.parseColor("#7f000000"));
-        canvas.drawRoundRect(new RectF(10, 10, 400, 400), 50, 50, paint);
+        paint.setAntiAlias(true);
+        paint.setShadowLayer(5, 10, 10, Color.parseColor("#7f000000"));
+        canvas.drawRoundRect(new RectF(0, 0, 300, 300), 20, 20, paint);
         canvas.save();
         ivCanvas.setImageBitmap(bitmap);
-
     }
 
     public void paintText(View view) {
@@ -66,12 +68,21 @@ public class CanvasExampleActivity extends AppCompatActivity {
         Paint paint = new Paint();
         paint.setColor(Color.parseColor("#000000"));
         paint.setStyle(Paint.Style.FILL);
-        paint.setTextSize(36);
+        paint.setTextSize(56);
 //        paint.setStrikeThruText(true);//横线
         paint.setHinting(Paint.HINTING_ON);
-        paint.setTypeface(Typeface.SERIF);
+        paint.setTypeface(Typeface.DEFAULT);
         canvas.drawColor(Color.GREEN);
-        canvas.drawText("这是一行文字!", 20, 100, paint);
+
+        canvas.drawText("这是一行文字(正常)!", 20, 100, paint);
+
+        paint.setFakeBoldText(true);
+        canvas.drawText("这是一行文字(加粗)!", 20, 200, paint);
+
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setFakeBoldText(false);
+        paint.setStrokeWidth(1);
+        canvas.drawText("这是一行文字(描边)!", 20, 300, paint);
         canvas.save();
         ivCanvas.setImageBitmap(bitmap);
     }
@@ -94,4 +105,13 @@ public class CanvasExampleActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        switch (level) {
+            case TRIM_MEMORY_UI_HIDDEN:
+                Log.d(TAG, "onTrimMemory: " + "UI对用户完全不可见");
+                break;
+        }
+    }
 }

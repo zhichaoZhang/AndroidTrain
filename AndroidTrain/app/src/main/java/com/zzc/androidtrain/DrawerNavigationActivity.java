@@ -1,18 +1,20 @@
 package com.zzc.androidtrain;
 
 import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
@@ -25,14 +27,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzc.androidtrain.app.BaseActivity;
+import com.zzc.androidtrain.async.MyIntentService;
+import com.zzc.androidtrain.deviceadmin.DevicePolicySetupActivity;
 import com.zzc.androidtrain.hotfix.BugClass;
+import com.zzc.androidtrain.jnitest.HelloJni;
+import com.zzc.androidtrain.net.HttpsTestActivity;
+import com.zzc.androidtrain.recycleview_drag_drop.RecyclerViewDragDropActivity;
+import com.zzc.androidtrain.renderscript.RenderScriptActivity;
 import com.zzc.androidtrain.tts.TTSActivity;
 import com.zzc.androidtrain.util.StatusBarUtil;
+import com.zzc.androidtrain.util.Toaster;
 
 public class DrawerNavigationActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
@@ -41,6 +49,7 @@ public class DrawerNavigationActivity extends BaseActivity
     private TextView tvHello;
     private LinearLayout rlRoot;
     private Button btnFade;
+    private IntentFilter mIntentServiceIntentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +83,8 @@ public class DrawerNavigationActivity extends BaseActivity
         tvHello = (TextView) findViewById(R.id.tv_hello);
         rlRoot = (LinearLayout) findViewById(R.id.root);
         btnFade = (Button)findViewById(R.id.btn_fade);
+
+        mIntentServiceIntentFilter = new IntentFilter(Constant.LocalBroadcast.BROADCAST_ACTION_MY_INTENT_SERVICE);
     }
 
     @Override
@@ -236,5 +247,68 @@ public class DrawerNavigationActivity extends BaseActivity
 
     public void onNewFeatureInSupportLibrary(View view) {
         startActivity(NewFeatureInSupportLibraryActivity.getCallingIntent(this));
+    }
+
+    public void onTouchTest(View view) {
+        startActivity(MotionEventActivity.getCallingIntent(this));
+    }
+
+    public void onRecyclerViewDrag(View view) {
+        startActivity(RecyclerViewDragDropActivity.getCallingIntent(this));
+    }
+
+    public void onStatusBarModel(View view) {
+        startActivity(StatusBarModelActivity.getCallingIntent(this));
+    }
+
+    public void onImageBlur(View view) {
+        startActivity(RenderScriptActivity.getCallingIntent(this));
+    }
+
+    public void onCallNativeMethod(View view) {
+        startActivity(HelloJni.getCallingIntent(this));
+    }
+
+    public void onNetTest(View view) {
+        startActivity(HttpsTestActivity.getCallingIntent(this));
+    }
+
+    public void onDevicePolicy(View view) {
+        startActivity(DevicePolicySetupActivity.getCallingIntent(this));
+    }
+
+    /**
+     * 开启后台任务
+     *
+     * 使用LocalBroadcast接收处理结果数据
+     * @param view
+     */
+    public void onNewIntentService(View view) {
+        MyIntentService.startActionFoo(this, "intent", "service");
+    }
+
+    private class ResponseReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String result = intent.getStringExtra(MyIntentService.EXTRA_RESULT);
+            Toaster.showLongToast(getBaseContext(), "任务完成:"+result);
+        }
+    }
+
+    private ResponseReceiver mBroadcastReceiver = new ResponseReceiver();
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //注册广播监听
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, mIntentServiceIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //取消注册
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mBroadcastReceiver);
     }
 }

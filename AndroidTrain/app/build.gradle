@@ -11,13 +11,19 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true//使用vector drawable特性需添加此属性
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        renderscriptSupportModeEnabled true //RenderScript是Android的计算图形框架
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            moduleName "jni-test"
         }
     }
+
+    sourceSets {
+        main {
+            jni.srcDirs  'src/main/jni'
+        }
+    }
+
 
     lintOptions {
         checkReleaseBuilds false
@@ -39,11 +45,26 @@ android {
 
         }
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            signingConfig signingConfigs.debug
+        }
+    }
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'

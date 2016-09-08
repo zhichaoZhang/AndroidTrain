@@ -64,11 +64,13 @@ public class MotionEventActivity extends AppCompatActivity implements GestureDet
 
     private void initView() {
         tvTouchEventTest = (MyMovableTextView) findViewById(R.id.tv_touch_event_test);
-//        tvTouchEventTest.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                //getActionMasked方法,设计用来处理多点触摸.他会返回执行过的动作的掩码值,不包括点的索引位.
-//                int action = MotionEventCompat.getActionMasked(event);
+        tvTouchEventTest.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //getActionMasked方法,设计用来处理多点触摸.他会返回执行过的动作的掩码值,不包括点的索引位.
+                int action = MotionEventCompat.getActionMasked(event);
+                int index = MotionEventCompat.getActionIndex(event);
+                event.getActionIndex();
 //                switch (action) {
 //                    case (MotionEvent.ACTION_DOWN):
 //                        Toaster.showShortToast(getBaseContext(), "Action Down1");
@@ -89,8 +91,9 @@ public class MotionEventActivity extends AppCompatActivity implements GestureDet
 //                    default:
 //                        return false;
 //                }
-//            }
-//        });
+                return false;
+            }
+        });
 
         tvTouchEventTest2 = (MyScaleTextView) findViewById(R.id.tv_touch_event_test2);
 //        tvTouchEventTest2.setOnTouchListener(new View.OnTouchListener() {

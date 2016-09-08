@@ -12,7 +12,6 @@ import com.zzc.androidtrain.common.FontManger;
 import com.zzc.androidtrain.util.StatusBarUtil;
 
 /**
- *
  * Created by zczhang on 16/4/5.
  */
 public class BaseActivity extends AppCompatActivity {
@@ -47,7 +46,9 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void setStatusBar() {
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+
     }
+
 
     @Override
     public Resources getResources() {

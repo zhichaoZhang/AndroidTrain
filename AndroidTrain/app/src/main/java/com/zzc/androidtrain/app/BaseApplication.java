@@ -1,19 +1,19 @@
 package com.zzc.androidtrain.app;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.zzc.androidtrain.util.DexUtil;
 
 import java.io.File;
-import java.lang.reflect.Proxy;
 
 /**
  * Created by zczhang on 16/4/10.
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends MultiDexApplication {
     private static final String TAG = "BaseApplication";
     /**
      * 修复的类dex文件存储路径
@@ -24,7 +24,8 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Log.e(TAG, "onCreate: " + "Application 初始化");
-
+        //初始化Fresco
+        Fresco.initialize(this);
     }
 
     @Override
@@ -41,6 +42,7 @@ public class BaseApplication extends Application {
         int largeUsableHeapSize = activityManager.getLargeMemoryClass();//通过在Manifest文件中设置largeHeap = true,可以设置一个更大内存请求,但有的手机这两个值是一样的
         Log.d(TAG, "init: 最大可用堆内存---->" + usableHeapSize + "M");
         Log.d(TAG, "init: 更大可用堆内存---->" + largeUsableHeapSize + "M");
+
 
     }
 
@@ -98,5 +100,6 @@ public class BaseApplication extends Application {
 
         System.out.println("---------存在需要更新的DEX----------");
         DexUtil.loadPatch(this, dirNewDex.concat("/patch.apk"));
+//        HotFix.patch(this, dirNewDex.concat("/patch.apk"), "com.zzc.android.util.BugClassUtil");
     }
 }

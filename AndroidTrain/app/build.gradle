@@ -10,6 +10,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true//使用vector drawable特性需添加此属性
         renderscriptSupportModeEnabled true //RenderScript是Android的计算图形框架
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -72,4 +73,5 @@ dependencies {
     compile 'com.android.support:support-vector-drawable:23.4.0'
     compile 'com.android.support:animated-vector-drawable:23.4.0'
     compile 'com.zzc.qrcodescan.zxing:qrcodescan:1.0.1'
+    compile 'com.facebook.fresco:fresco:0.12.0'
 }

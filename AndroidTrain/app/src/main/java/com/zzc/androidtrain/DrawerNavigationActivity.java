@@ -33,7 +33,8 @@ import android.widget.Toast;
 import com.zzc.androidtrain.app.BaseActivity;
 import com.zzc.androidtrain.async.MyIntentService;
 import com.zzc.androidtrain.deviceadmin.DevicePolicySetupActivity;
-import com.zzc.androidtrain.hotfix.BugClass;
+import com.zzc.androidtrain.view.GridViewActivity;
+import com.zzc.androidtrain.hotfix.BugHotFixTestActivity;
 import com.zzc.androidtrain.jnitest.HelloJni;
 import com.zzc.androidtrain.net.HttpsTestActivity;
 import com.zzc.androidtrain.recycleview_drag_drop.RecyclerViewDragDropActivity;
@@ -185,7 +186,7 @@ public class DrawerNavigationActivity extends BaseActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-            startActivity(new Intent(DrawerNavigationActivity.this, BugClass.class));
+            startActivity(new Intent(DrawerNavigationActivity.this, BugHotFixTestActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -275,6 +276,10 @@ public class DrawerNavigationActivity extends BaseActivity
 
     public void onDevicePolicy(View view) {
         startActivity(DevicePolicySetupActivity.getCallingIntent(this));
+    }
+
+    public void onGridViewTest(View view) {
+        startActivity(GridViewActivity.getCallingIntent(this));
     }
 
     /**

@@ -103,6 +103,12 @@
             android:layout_height="wrap_content"
             android:onClick="onDevicePolicy"
             android:text="设备代理" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onGridViewTest"
+            android:text="GridView渲染测试" />
     </LinearLayout>
 </ScrollView>
 

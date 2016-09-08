@@ -21,7 +21,7 @@ import java.io.IOException;
  *
  * Created by zczhang on 16/4/10.
  */
-public class BugClass extends BaseActivity{
+public class BugHotFixTestActivity extends BaseActivity{
     TextView tvTip = null;
 
     @Override
@@ -32,14 +32,14 @@ public class BugClass extends BaseActivity{
     }
 
     public void bugMethod() {
-//        Toast.makeText(this, "这是一个有bug的方法", Toast.LENGTH_SHORT).show();
-//        System.out.println("this is one bug method in a bug class");
+        Toast.makeText(this, "这是一个有bug的方法", Toast.LENGTH_SHORT).show();
+        System.out.println("this is one bug method in a bug class");
 
-        startActivity(new Intent(this, DrawerNavigationActivity.class));
+//        startActivity(new Intent(this, DrawerNavigationActivity.class));
 
 //        Toast.makeText(this, "这个有bug的方法已被修复", Toast.LENGTH_SHORT).show();
 //        System.out.println("this bug method has been fixed");
-//        BugClassUtil.bugMethod(this);
+//        new BugClassUtil().bugMethod(this);
     }
 
     public void onBugBtnClick(View view) {
@@ -56,6 +56,6 @@ public class BugClass extends BaseActivity{
     }
 
     public void onRestartBtnClick(View view) {
-       BugClassUtil.bugMethod(this);
+        new BugClassUtil().bugMethod(this);
     }
 }

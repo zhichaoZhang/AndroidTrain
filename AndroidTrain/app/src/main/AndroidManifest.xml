@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zzc.androidtrain">
+          package="com.zzc.androidtrain">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.NFC" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!--指纹识别权限-->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- 指纹识别权限 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
     <!-- NFC文件传输 -->
     <uses-feature
         android:name="android.hardware.nfc"
-        android:required="false" />
-    <!--相机特性 非必须-->
+        android:required="false"/>
+    <!-- 相机特性 非必须 -->
     <uses-feature
         android:name="android.hardware.camera2"
-        android:required="false" />
+        android:required="false"/>
 
     <application
         android:name=".app.BaseApplication"
@@ -38,14 +39,14 @@
             android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
                     android:host="host"
-                    android:scheme="scheme" />
+                    android:scheme="scheme"/>
             </intent-filter>
         </activity>
         <activity
@@ -54,13 +55,13 @@
             android:parentActivityName=".DrawerNavigationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DrawerNavigationActivity" />
+                android:value=".DrawerNavigationActivity"/>
         </activity>
         <activity
             android:name=".ItemListActivity"
             android:label="@string/title_item_list"
             android:parentActivityName=".DrawerNavigationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ItemDetailActivity"
             android:label="@string/title_item_detail"
@@ -68,63 +69,69 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.zzc.androidtrain.ItemListActivity" />
+                android:value="com.zzc.androidtrain.ItemListActivity"/>
         </activity>
         <activity
             android:name=".ViewPagerActivity"
             android:label="@string/title_activity_viewpager"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"/>
         <activity
             android:name=".PrintActivity"
-            android:label="@string/title_activity_print" />
+            android:label="@string/title_activity_print"/>
         <activity
-            android:name=".hotfix.BugClass"
-            android:label="@string/title_activity_bug" />
-        <activity android:name=".tts.TTSActivity" />
-        <activity android:name=".SystemBarActivity" />
-        <activity android:name=".CanvasExampleActivity" />
-        <activity android:name=".WebActivity" />
-        <activity android:name=".NewFeatureInSupportLibraryActivity" />
-        <activity android:name=".MotionEventActivity" />
-        <activity android:name=".recycleview_drag_drop.RecyclerViewDragDropActivity" />
-        <activity android:name=".jnitest.HelloJni" />
+            android:name=".hotfix.BugHotFixTestActivity"
+            android:label="@string/title_activity_bug"/>
+        <activity android:name=".tts.TTSActivity"/>
+        <activity android:name=".SystemBarActivity"/>
+        <activity android:name=".CanvasExampleActivity"/>
+        <activity android:name=".WebActivity"/>
+        <activity android:name=".NewFeatureInSupportLibraryActivity"/>
+        <activity android:name=".MotionEventActivity"/>
+        <activity android:name=".recycleview_drag_drop.RecyclerViewDragDropActivity"/>
+        <activity android:name=".jnitest.HelloJni"/>
         <activity
             android:name=".StatusBarModelActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
 
         <service
             android:name=".async.MyIntentService"
-            android:exported="false" />
+            android:exported="false"/>
 
-        <activity android:name=".renderscript.RenderScriptActivity" />
-        <activity android:name=".thread.ThreadTestActivity" />
-        <activity android:name=".net.HttpsTestActivity" />
-        <activity android:name=".fragment.FragmentActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".renderscript.RenderScriptActivity"/>
+        <activity android:name=".thread.ThreadTestActivity"/>
+        <activity android:name=".net.HttpsTestActivity"/>
+        <activity android:name=".fragment.FragmentActivity"></activity>
 
         <receiver
             android:name=".deviceadmin.Policy$PolicyAdmin"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
-                android:resource="@xml/device_admin" />
+                android:resource="@xml/device_admin"/>
 
             <intent-filter>
-                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
             </intent-filter>
         </receiver>
 
-        <activity android:name=".deviceadmin.DevicePolicySetupActivity"></activity>
-        <activity android:name=".deviceadmin.SecureActivity" />
+        <activity android:name=".deviceadmin.DevicePolicySetupActivity"/>
+        <activity android:name=".deviceadmin.SecureActivity"/>
+        <activity android:name=".view.GridViewActivity"></activity>
+        <activity android:name=".multi_process_keep_alive.MainProcessActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <service android:name=".multi_process_keep_alive.LocalService"></service>
+
+        <service android:name=".multi_process_keep_alive.RemoteService" android:process=".remote"></service>
     </application>
 
 </manifest>

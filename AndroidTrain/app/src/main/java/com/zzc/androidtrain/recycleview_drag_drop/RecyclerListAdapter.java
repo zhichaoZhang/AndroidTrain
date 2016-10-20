@@ -41,7 +41,6 @@ import java.util.List;
  * Simple RecyclerView.Adapter that implements {@link ItemTouchHelperAdapter} to respond to move and
  * dismiss events from a {@link android.support.v7.widget.helper.ItemTouchHelper}.
  *
- * @author Paul Burke (ipaulpro)
  */
 public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapter.ItemViewHolder>
         implements ItemTouchHelperAdapter {
@@ -50,9 +49,47 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     private final OnStartDragListener mDragStartListener;
 
+    private OnItemClickListener onItemClickListener;
+
+    private Context mContext;
+
     public RecyclerListAdapter(Context context, OnStartDragListener dragStartListener) {
+        this.mContext = context;
         mDragStartListener = dragStartListener;
         mItems.addAll(Arrays.asList(context.getResources().getStringArray(R.array.dummy_items)));
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public void onItemAdd(String item, int index) {
+        mItems.add(index, item);
+        notifyItemInserted(index);
+    }
+
+    public void onItemAdd(List<String> items, int index) {
+        mItems.addAll(index, items);
+        notifyItemRangeInserted(index, items.size());
+    }
+
+    public void onItemDel(int index) {
+        if(mItems.size() == 0) return;
+        mItems.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void onItemChange(String newItem, int index) {
+        if(mItems.size() == 0 || mItems.size() <= index) return;
+        mItems.remove(index);
+        mItems.add(index, newItem);
+        notifyItemChanged(index);
+    }
+
+    public void onDataRefresh() {
+        mItems.clear();
+        mItems.addAll(Arrays.asList(mContext.getResources().getStringArray(R.array.dummy_items)));
+        notifyDataSetChanged();
     }
 
     @Override
@@ -63,17 +100,35 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     }
 
     @Override
-    public void onBindViewHolder(final ItemViewHolder holder, int position) {
+    public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         holder.textView.setText(mItems.get(position));
 
         // Start a drag whenever the handle view it touched
-        holder.handleView.setOnTouchListener(new View.OnTouchListener() {
+//        holder.handleView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_MOVE) {
+//                    mDragStartListener.onStartDrag(holder);
+//                }
+//                return false;
+//            }
+//        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onStartDrag(holder);
-                }
+            public boolean onLongClick(View v) {
+                mDragStartListener.onStartDrag(holder);
                 return false;
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null) {
+                    onItemClickListener.onItemClick(holder.getAdapterPosition());
+//                    onItemClickListener.onItemClick(position);
+                }
             }
         });
     }
@@ -122,4 +177,10 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             itemView.setBackgroundColor(0);
         }
     }
+
+    interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+
 }

@@ -1,0 +1,2 @@
+in/haojin/nearbymerchant/ui/activity/coupon/NewCustomersActivity.class
+in/haojin/nearbymerchant/R.class

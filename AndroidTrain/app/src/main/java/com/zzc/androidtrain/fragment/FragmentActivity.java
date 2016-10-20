@@ -1,5 +1,7 @@
 package com.zzc.androidtrain.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,6 +24,12 @@ public class FragmentActivity extends BaseActivity implements FragmentManager.On
     private static final String TAG = "FragmentActivity";
     FrameLayout flContainer;
     FragmentManager mFragmentManager;
+
+    public static Intent getCallingIntent(Context context) {
+        Intent intent = new Intent(context, FragmentActivity.class);
+        return intent;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

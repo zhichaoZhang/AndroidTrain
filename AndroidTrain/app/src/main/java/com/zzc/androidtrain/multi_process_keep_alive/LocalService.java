@@ -36,6 +36,7 @@ public class LocalService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i(TAG, "onStartCommand: " + "本地服务启动");
         bindRemoteService();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -63,6 +64,7 @@ public class LocalService extends Service {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            Log.i(TAG, "onServiceDisconnected: " + "断开连接");
             startRemoteService();
             bindRemoteService();
         }

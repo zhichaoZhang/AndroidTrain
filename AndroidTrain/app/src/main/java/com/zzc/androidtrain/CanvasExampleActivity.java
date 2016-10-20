@@ -16,11 +16,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.zzc.androidtrain.view.SeekBarCustom;
+
 
 public class CanvasExampleActivity extends AppCompatActivity {
     private static final String TAG = "CanvasExampleActivity";
     RelativeLayout rlContainer;
     ImageView ivCanvas;
+    SeekBarCustom seekBarCustom;
+    TextView tvProgress;
 
     public static Intent getCallingIntent(Context context) {
         Intent intent = new Intent(context, CanvasExampleActivity.class);
@@ -33,6 +39,18 @@ public class CanvasExampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_canvas_example);
         rlContainer = (RelativeLayout) findViewById(R.id.rl_container);
         ivCanvas = (ImageView) findViewById(R.id.iv_canvas);
+        seekBarCustom = (SeekBarCustom)findViewById(R.id.seek_bar);
+        tvProgress = (TextView)findViewById(R.id.tv_progress);
+//        seekBarCustom.setMaxValue(10);
+//        seekBarCustom.setMinValue(2);
+//        seekBarCustom.setCurrentValue(1);
+        seekBarCustom.setChangedListener(new SeekBarCustom.OnSeekBarChangListener() {
+            @Override
+            public void onProgressChanged(SeekBarCustom seekBarCustom, int progress) {
+                super.onProgressChanged(seekBarCustom, progress);
+                tvProgress.setText(String.valueOf(progress));
+            }
+        });
     }
 
     public void paintLine(View view) {
@@ -103,6 +121,24 @@ public class CanvasExampleActivity extends AppCompatActivity {
         canvas.save();
         ivCanvas.setImageBitmap(bitmap);
 
+    }
+
+    public void paintRing(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setColor(Color.BLUE);
+        paint.setStrokeWidth(20f);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        RectF rectF = new RectF(100, 100, 500, 500);
+        float startAngle = 0f;
+        float endAngle = 180f;
+        canvas.drawColor(Color.WHITE);
+        //0度是在表的三点钟位置
+        canvas.drawArc(rectF, startAngle, endAngle, false, paint);
+        canvas.save();
+        ivCanvas.setImageBitmap(bitmap);
     }
 
     @Override

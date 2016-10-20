@@ -31,13 +31,17 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".DrawerNavigationActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -104,7 +108,7 @@
         <activity android:name=".renderscript.RenderScriptActivity"/>
         <activity android:name=".thread.ThreadTestActivity"/>
         <activity android:name=".net.HttpsTestActivity"/>
-        <activity android:name=".fragment.FragmentActivity"></activity>
+        <activity android:name=".fragment.FragmentActivity"/>
 
         <receiver
             android:name=".deviceadmin.Policy$PolicyAdmin"
@@ -120,18 +124,31 @@
 
         <activity android:name=".deviceadmin.DevicePolicySetupActivity"/>
         <activity android:name=".deviceadmin.SecureActivity"/>
-        <activity android:name=".view.GridViewActivity"></activity>
+        <activity android:name=".view.GridViewActivity"/>
         <activity android:name=".multi_process_keep_alive.MainProcessActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
 
-        <service android:name=".multi_process_keep_alive.LocalService"></service>
+        <service android:name=".multi_process_keep_alive.LocalService"/>
+        <service
+            android:name=".multi_process_keep_alive.RemoteService"
+            android:process=":remote"/>
 
-        <service android:name=".multi_process_keep_alive.RemoteService" android:process=".remote"></service>
+        <activity android:name=".recycleview_drag_drop.helper.Main2Activity">
+        </activity>
+        <activity android:name=".anim.frame_anim.FrameAnimActivity">
+        </activity>
+        <activity android:name=".anim.property_anim.PropertyAnimActivity">
+        </activity>
+        <activity android:name=".anim.view_anim.ViewAnimActivity">
+        </activity>
+        <activity android:name=".CalendarActivity">
+        </activity>
+        <activity android:name=".image_filter.ImageFilterActivity">
+        </activity>
+        <activity android:name=".image_filter.OpenglFilterEffectActivity">
+        </activity>
+        <activity android:name=".apk_patch.ApkPatchActivity">
+        </activity>
     </application>
 
 </manifest>

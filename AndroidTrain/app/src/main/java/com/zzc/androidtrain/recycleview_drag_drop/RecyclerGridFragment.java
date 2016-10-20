@@ -33,7 +33,7 @@ import com.zzc.androidtrain.recycleview_drag_drop.helper.SimpleItemTouchHelperCa
 /**
  * @author Paul Burke (ipaulpro)
  */
-public class RecyclerGridFragment extends Fragment implements OnStartDragListener {
+public class RecyclerGridFragment extends Fragment implements OnStartDragListener, RecyclerViewDragDropActivity.RecyclerOperateListener {
 
     private ItemTouchHelper mItemTouchHelper;
 
@@ -68,5 +68,20 @@ public class RecyclerGridFragment extends Fragment implements OnStartDragListene
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public void onAdd() {
+
+    }
+
+    @Override
+    public void onDel() {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 }

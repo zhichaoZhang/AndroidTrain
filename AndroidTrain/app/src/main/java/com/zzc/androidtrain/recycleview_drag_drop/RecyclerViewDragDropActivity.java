@@ -21,14 +21,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.zzc.androidtrain.R;
 import com.zzc.androidtrain.app.BaseActivity;
+import com.zzc.androidtrain.util.Toaster;
 
 /**
  * @author Paul Burke (ipaulpro)
  */
 public class RecyclerViewDragDropActivity extends BaseActivity implements MainFragment.OnListItemClickListener {
+
+    Fragment fragment = null;
 
     public static Intent getCallingIntent(Context context) {
         Intent intent = new Intent();
@@ -41,7 +48,9 @@ public class RecyclerViewDragDropActivity extends BaseActivity implements MainFr
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_recycleview_drag_drop);
-//        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setSubtitle("RecyclerView");
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             MainFragment fragment = new MainFragment();
@@ -53,7 +62,6 @@ public class RecyclerViewDragDropActivity extends BaseActivity implements MainFr
 
     @Override
     public void onListItemClick(int position) {
-        Fragment fragment = null;
         switch (position) {
             case 0:
                 fragment = new RecyclerListFragment();
@@ -70,4 +78,37 @@ public class RecyclerViewDragDropActivity extends BaseActivity implements MainFr
                 .commit();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recyclerview, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(fragment == null || !(fragment instanceof RecyclerOperateListener)) {
+            return false;
+        }
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                Toaster.showShortToast(getBaseContext(),  "添加");
+                ((RecyclerOperateListener)fragment).onAdd();
+                break;
+            case R.id.action_del:
+                Toaster.showShortToast(getBaseContext(),  "删除");
+                ((RecyclerOperateListener)fragment).onDel();
+                break;
+            case R.id.action_refresh:
+                Toaster.showShortToast(getBaseContext(),  "刷新");
+                ((RecyclerOperateListener)fragment).onRefresh();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    interface RecyclerOperateListener {
+        void onAdd();
+        void onDel();
+        void onRefresh();
+    }
 }

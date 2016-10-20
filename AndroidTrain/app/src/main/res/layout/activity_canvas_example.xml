@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.zzc.androidtrain.CanvasExampleActivity">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context="com.zzc.androidtrain.CanvasExampleActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,25 +21,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="paintLine"
-            android:text="画一条线" />
+            android:text="画一条线"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="paintRec"
-            android:text="画一个带圆角的矩形" />
+            android:text="画一个带圆角的矩形"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="paintText"
-            android:text="画一些文字" />
+            android:text="画一些文字"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="paintTextWithPath"
-            android:text="画一带路径的文字" />
+            android:text="画一带路径的文字"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="paintRing"
+            android:text="画一个环"/>
+
+        <com.zzc.androidtrain.view.SeekBarCustom
+            android:id="@+id/seek_bar"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            app:progress_max="14"
+            app:progress_min="1"
+            app:progress_current_value="7"
+            android:layerType="software"/>
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="进度"
+            />
 
         <RelativeLayout
             android:id="@+id/rl_container"

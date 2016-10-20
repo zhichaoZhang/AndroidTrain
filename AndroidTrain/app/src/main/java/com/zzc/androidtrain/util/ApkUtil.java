@@ -1,9 +1,11 @@
 package com.zzc.androidtrain.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -95,5 +97,13 @@ public class ApkUtil {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public static void installApk(Context context, String path) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        // 确保更新后提示打开？
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setDataAndType(Uri.parse("file://" + path), "application/vnd.android.package-archive");
+        context.startActivity(i);
     }
 }

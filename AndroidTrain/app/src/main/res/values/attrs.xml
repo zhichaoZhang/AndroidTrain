@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeekBarCustom">
+        <attr name="progress_height" format="dimension|integer"/>
+        <attr name="progress_color" format="color|reference"/>
+        <attr name="progress_second_color" format="color|reference"/>
+        <attr name="thumb_color" format="color|reference"/>
+        <attr name="thumb_radius" format="dimension|integer"/>
+        <attr name="shadow_x" format="integer|dimension"/>
+        <attr name="shadow_y" format="dimension|integer"/>
+        <attr name="shadow_color" format="color|reference"/>
+        <attr name="progress_max" format="integer|dimension"/>
+        <attr name="progress_min" format="integer|dimension"/>
+        <attr name="progress_current_value" format="integer"/>
+    </declare-styleable>
+</resources>

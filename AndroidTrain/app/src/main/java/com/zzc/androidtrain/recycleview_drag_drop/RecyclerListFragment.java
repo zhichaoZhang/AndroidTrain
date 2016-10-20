@@ -19,6 +19,7 @@ package com.zzc.androidtrain.recycleview_drag_drop;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -29,15 +30,24 @@ import android.view.ViewGroup;
 import com.zzc.androidtrain.recycleview_drag_drop.helper.OnStartDragListener;
 import com.zzc.androidtrain.recycleview_drag_drop.helper.SimpleItemTouchHelperCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
+
 
 /**
- * @author Paul Burke (ipaulpro)
+ *
  */
-public class RecyclerListFragment extends Fragment implements OnStartDragListener {
+public class RecyclerListFragment extends Fragment implements OnStartDragListener, RecyclerViewDragDropActivity.RecyclerOperateListener,
+        RecyclerListAdapter.OnItemClickListener {
 
     private ItemTouchHelper mItemTouchHelper;
+    RecyclerListAdapter adapter;
+    RecyclerView recyclerView;
 
     public RecyclerListFragment() {
+
     }
 
     @Nullable
@@ -50,11 +60,18 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerListAdapter adapter = new RecyclerListAdapter(getActivity(), this);
-
-        RecyclerView recyclerView = (RecyclerView) view;
+        adapter = new RecyclerListAdapter(getActivity(), this);
+        adapter.setOnItemClickListener(this);
+        recyclerView = (RecyclerView) view;
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        defaultItemAnimator.setChangeDuration(1000 * 2);
+        defaultItemAnimator.setAddDuration(1000 * 2);
+        defaultItemAnimator.setRemoveDuration(1000 * 2);
+        defaultItemAnimator.setSupportsChangeAnimations(true);
+        SlideInRightAnimator defaultItemAnimator2 = new SlideInRightAnimator();
+        recyclerView.setItemAnimator(defaultItemAnimator2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
@@ -65,5 +82,32 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public void onAdd() {
+        adapter.onItemAdd("Zero", 0);
+//        List<String> items = new ArrayList<>();
+//        items.add("Zero");
+//        items.add("Zero");
+//        items.add("Zero");
+//        items.add("Zero");
+//        adapter.onItemAdd(items, 0);
+        recyclerView.scrollToPosition(0);
+    }
+
+    @Override
+    public void onDel() {
+        adapter.onItemDel(0);
+    }
+
+    @Override
+    public void onRefresh() {
+        adapter.onDataRefresh();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        adapter.onItemChange(position + "", position);
     }
 }

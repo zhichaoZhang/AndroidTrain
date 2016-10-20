@@ -109,6 +109,36 @@
             android:layout_height="wrap_content"
             android:onClick="onGridViewTest"
             android:text="GridView渲染测试" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCalendar"
+            android:text="日历" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onFragment"
+            android:text="Fragment" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onSendNotification"
+            android:text="发送通知" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onImageFilter"
+            android:text="图片滤镜" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPathUpdate"
+            android:text="增量更新" />
     </LinearLayout>
 </ScrollView>
 

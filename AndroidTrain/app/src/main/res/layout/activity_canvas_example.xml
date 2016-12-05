@@ -47,6 +47,12 @@
             android:onClick="paintRing"
             android:text="画一个环"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="paintQuadBezier"
+            android:text="二阶贝塞尔曲线"/>
+
         <com.zzc.androidtrain.view.SeekBarCustom
             android:id="@+id/seek_bar"
             android:layout_width="250dp"

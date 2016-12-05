@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <View
+        android:id="@+id/detail_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/palette_aluminium"
+        android:transitionName="@string/transition_root"
+        />
+
+    <ImageView
+        android:id="@+id/iv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_test"
+        android:transitionName="@string/transition_image"
+        />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/Base.TextAppearance.AppCompat.Display2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_detail"
+        android:layout_margin="15dp"
+        android:text="标题"
+        />
+
+    <TextView
+        android:id="@+id/tv_content"
+        style="@style/Base.TextAppearance.AppCompat.Display1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:padding="10dp"
+        android:text="好长好长长好长长好长长好长长好长长好长长好长长好长长好长长好长长好长长好长长好长长好长长好长"
+        />
+</RelativeLayout>

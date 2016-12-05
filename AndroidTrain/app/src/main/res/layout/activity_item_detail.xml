@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:fitsSystemWindows="true"
+        app:layout_behavior="com.zzc.androidtrain.recycleview_drag_drop.FlingBehavior"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -22,6 +23,13 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_height"
+                android:src="@drawable/img_test"
+                android:scaleType="centerCrop"
+                />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/detail_toolbar"

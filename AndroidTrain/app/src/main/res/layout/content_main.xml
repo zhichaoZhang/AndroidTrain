@@ -139,6 +139,24 @@
             android:layout_height="wrap_content"
             android:onClick="onPathUpdate"
             android:text="增量更新" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickTestDownloadManager"
+            android:text="DownloadManager" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickTransition"
+            android:text="ActivityTransition" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPullToRefresh"
+            android:text="下拉刷新" />
     </LinearLayout>
 </ScrollView>
 

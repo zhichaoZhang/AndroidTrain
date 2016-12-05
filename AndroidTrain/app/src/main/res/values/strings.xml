@@ -144,4 +144,7 @@
     <string name="device_admin_activation_message">Provide a message here explaining why an application needs to become a device administrator.</string>
     <string name="operate_origin">原图</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

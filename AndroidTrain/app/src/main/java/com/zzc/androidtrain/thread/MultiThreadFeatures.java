@@ -20,12 +20,6 @@ public class MultiThreadFeatures {
                 super.run();
                 while (isRun) {
                     i++;
-//                    System.out.println("i--->" + i);
-//                    try {
-//                        Thread.sleep(100);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
                 }
             }
         };
@@ -41,14 +35,14 @@ public class MultiThreadFeatures {
 
 //        System.out.println("i---->" + i);
     }
-
-    public void syncBlockImpl() {
-        synchronized (this)  {
-            System.out.println("hello world");
-        }
-    }
-
-    public synchronized void syncMethodImpl() {
-        System.out.println("hello world");
-    }
+//
+//    public void syncBlockImpl() {
+//        synchronized (this)  {
+//            System.out.println("hello world");
+//        }
+//    }
+//
+//    public synchronized void syncMethodImpl() {
+//        System.out.println("hello world");
+//    }
 }

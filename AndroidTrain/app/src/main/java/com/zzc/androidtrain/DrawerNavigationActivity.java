@@ -40,9 +40,11 @@ import android.widget.Toast;
 import com.zzc.androidtrain.apk_patch.ApkPatchActivity;
 import com.zzc.androidtrain.app.BaseActivity;
 import com.zzc.androidtrain.async.MyIntentService;
+import com.zzc.androidtrain.async.SystemDownLoadManager;
 import com.zzc.androidtrain.deviceadmin.DevicePolicySetupActivity;
 import com.zzc.androidtrain.fragment.FragmentActivity;
 import com.zzc.androidtrain.image_filter.ImageFilterActivity;
+import com.zzc.androidtrain.transition.ListActivity;
 import com.zzc.androidtrain.view.GridViewActivity;
 import com.zzc.androidtrain.hotfix.BugHotFixTestActivity;
 import com.zzc.androidtrain.jnitest.HelloJni;
@@ -52,6 +54,8 @@ import com.zzc.androidtrain.renderscript.RenderScriptActivity;
 import com.zzc.androidtrain.tts.TTSActivity;
 import com.zzc.androidtrain.util.StatusBarUtil;
 import com.zzc.androidtrain.util.Toaster;
+import com.zzc.androidtrain.view.refresh.PullToRefresh2;
+import com.zzc.androidtrain.view.refresh.PullToRefreshActivity;
 
 public class DrawerNavigationActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
@@ -328,6 +332,18 @@ public class DrawerNavigationActivity extends BaseActivity
 
     public void onPathUpdate(View view) {
         startActivity(ApkPatchActivity.getCallingIntent(this));
+    }
+
+    public void onClickTestDownloadManager(View view) {
+        startActivity(SystemDownLoadManager.getCallingIntent(this));
+    }
+
+    public void onClickTransition(View view) {
+        startActivity(ListActivity.getCallingIntent(this));
+    }
+
+    public void onPullToRefresh(View view) {
+        startActivity(PullToRefresh2.getCallingIntent(this));
     }
 
     /**

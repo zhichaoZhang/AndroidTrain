@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.zzc.androidtrain.R;
@@ -65,19 +64,5 @@ public class FragmentActivity extends BaseActivity implements FragmentManager.On
         for(Fragment fragment : mFragmentManager.getFragments()) {
             Log.i(TAG, ("Fragment Back Stack's Fragment is "+fragment));
         }
-    }
-
-    public void onClickAddWebFragment(View view) {
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        WebFragment webFragment = WebFragment.newInstance("http://www.baidu.com");
-        fragmentTransaction.replace(R.id.fl_container, webFragment);
-        fragmentTransaction.commit();
-    }
-
-    public void onClickBottomFragment(View view) {
-        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        BottomFragment bottomFragment = new BottomFragment();
-        fragmentTransaction.replace(R.id.fl_bottom, bottomFragment);
-        fragmentTransaction.commit();
     }
 }

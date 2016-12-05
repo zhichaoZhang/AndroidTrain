@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                tools:context=".NewFeatureInSupportLibraryActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".NewFeatureInSupportLibraryActivity">
 
     <TextView
         android:id="@+id/tv_new_feature"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="最新版本23.4.0\n1.支持矢量图片和动画\n2.支持切换日间和夜间模式\n3.支持Bottom Sheet Dialog"/>
+        android:text="最新版本23.4.0\n1.支持矢量图片和动画\n2.支持切换日间和夜间模式\n3.支持Bottom Sheet Dialog" />
 
     <ImageView
         android:id="@+id/vector_drawable_cpu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_new_feature"
-        app:srcCompat="@drawable/vector_drawable_cpu"/>
+        app:srcCompat="@drawable/vector_drawable_cpu" />
 
     <ImageView
         android:id="@+id/vector_drawable_cpu_ani"
@@ -30,7 +30,7 @@
         android:layout_below="@+id/tv_new_feature"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/vector_drawable_cpu"
-        app:srcCompat="@drawable/animated_cpu"/>
+        app:srcCompat="@drawable/animated_cpu" />
 
     <ImageView
         android:id="@+id/vector_drawable_heart"
@@ -40,27 +40,5 @@
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@id/vector_drawable_cpu_ani"
         app:srcCompat="@drawable/vector_drawable_heart"
-        />
-
-    <com.rey.material.widget.ProgressView
-        android:id="@+id/progress_view"
-        android:layout_width="match_parent"
-        android:layout_height="13dp"
-        android:layout_below="@+id/vector_drawable_heart"
-        android:background="@color/cardview_dark_background"
-        app:pv_autostart="true"
-        app:pv_circular="false"
-        app:pv_progress="2"
-        app:pv_progressMode="determinate"
-        app:pv_progressStyle="@style/LightLinearProgressDrawable"
-        app:pv_secondaryProgress="0.8"
-        />
-
-    <ImageView
-        android:id="@+id/iv_transition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progress_view"
-        android:src="@drawable/img_test"
         />
 </RelativeLayout>

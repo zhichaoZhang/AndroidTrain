@@ -65,13 +65,13 @@ public class RecyclerListFragment extends Fragment implements OnStartDragListene
         recyclerView = (RecyclerView) view;
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-//        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
-//        defaultItemAnimator.setChangeDuration(1000 * 2);
-//        defaultItemAnimator.setAddDuration(1000 * 2);
-//        defaultItemAnimator.setRemoveDuration(1000 * 2);
-//        defaultItemAnimator.setSupportsChangeAnimations(true);
-//        SlideInRightAnimator defaultItemAnimator2 = new SlideInRightAnimator();
-//        recyclerView.setItemAnimator(defaultItemAnimator2);
+        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+        defaultItemAnimator.setChangeDuration(1000 * 2);
+        defaultItemAnimator.setAddDuration(1000 * 2);
+        defaultItemAnimator.setRemoveDuration(1000 * 2);
+        defaultItemAnimator.setSupportsChangeAnimations(true);
+        SlideInRightAnimator defaultItemAnimator2 = new SlideInRightAnimator();
+        recyclerView.setItemAnimator(defaultItemAnimator2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);

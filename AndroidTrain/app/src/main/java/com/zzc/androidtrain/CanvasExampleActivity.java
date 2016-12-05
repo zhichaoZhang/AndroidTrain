@@ -7,8 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Point;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -39,8 +39,8 @@ public class CanvasExampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_canvas_example);
         rlContainer = (RelativeLayout) findViewById(R.id.rl_container);
         ivCanvas = (ImageView) findViewById(R.id.iv_canvas);
-        seekBarCustom = (SeekBarCustom) findViewById(R.id.seek_bar);
-        tvProgress = (TextView) findViewById(R.id.tv_progress);
+        seekBarCustom = (SeekBarCustom)findViewById(R.id.seek_bar);
+        tvProgress = (TextView)findViewById(R.id.tv_progress);
 //        seekBarCustom.setMaxValue(10);
 //        seekBarCustom.setMinValue(2);
 //        seekBarCustom.setCurrentValue(1);
@@ -137,29 +137,6 @@ public class CanvasExampleActivity extends AppCompatActivity {
         canvas.drawColor(Color.WHITE);
         //0度是在表的三点钟位置
         canvas.drawArc(rectF, startAngle, endAngle, false, paint);
-        canvas.save();
-        ivCanvas.setImageBitmap(bitmap);
-    }
-
-    public void paintQuadBezier(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(Color.parseColor("#000000"));
-        paint.setStrokeWidth(10);//画笔宽度
-        paint.setDither(true);
-        paint.setStyle(Paint.Style.STROKE);//画笔样式 实心/空心
-//        paint.setShadowLayer(10, 5, 5, Color.RED);
-        canvas.drawColor(Color.GREEN);
-        Path path = new Path();
-        Point startPoint = new Point(300,500);
-        Point assistPoint = new Point(630, 400);
-        Point endPoint = new Point(700, 10);
-        path.moveTo(startPoint.x, startPoint.y);
-        path.quadTo(assistPoint.x, assistPoint.y, endPoint.x, endPoint.y);
-        canvas.drawPath(path, paint);
-        canvas.drawPoint(assistPoint.x,assistPoint.y,paint);
         canvas.save();
         ivCanvas.setImageBitmap(bitmap);
     }

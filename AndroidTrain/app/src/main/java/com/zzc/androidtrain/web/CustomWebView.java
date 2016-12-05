@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.AttributeSet;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -16,7 +15,6 @@ import com.zzc.androidtrain.util.DeviceUtil;
  * Created by fengruicong on 16-3-23.
  */
 public class CustomWebView extends WebView {
-
     public CustomWebView(Context context) {
         super(context);
         init(context);

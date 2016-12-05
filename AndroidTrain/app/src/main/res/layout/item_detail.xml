@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <Button
@@ -14,36 +14,5 @@
         android:layout_height="wrap_content"
         android:onClick="createCurrentTaskNotification"
         android:text="创建一个的Notification,点击显示此页面,并同时创建父页面" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_test"
-        android:layout_margin="20dp"
-        />
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="不要用过去式安排，不要，不用力要获取。面对失败，只是经历。总好过没有新的未来。\n\n从没想过要离开，有什么理由将我打败。背对着人海，拥抱最初的期待。\n
-        他不记得脸，像天色将晚。"
-        android:layout_margin="20dp"
-        />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_test"
-        android:layout_margin="20dp"
-        />
-
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="不要用过去式安排，不要，不用力要获取。面对失败，只是经历。总好过没有新的未来。\n\n从没想过要离开，有什么理由将我打败。背对着人海，拥抱最初的期待。\n
-        他不记得脸，像天色将晚。"
-        android:layout_margin="20dp"
-        />
-
 
 </LinearLayout>

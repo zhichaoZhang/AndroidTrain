@@ -139,6 +139,43 @@
             android:layout_height="wrap_content"
             android:onClick="onPathUpdate"
             android:text="增量更新" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickTestDownloadManager"
+            android:text="DownloadManager" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickTransition"
+            android:text="ActivityTransition" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onPullToRefresh"
+            android:text="下拉刷新" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickQrcodeTestBtn"
+            android:text="二维码扫描" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickChangeAppIcon"
+            android:text="动态更改App图标" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickPicCompress"
+            android:text="图片压缩" />
     </LinearLayout>
 </ScrollView>
 

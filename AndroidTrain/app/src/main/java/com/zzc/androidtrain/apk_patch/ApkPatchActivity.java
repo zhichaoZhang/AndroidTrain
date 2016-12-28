@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
+import com.joye.library.PatchUpdateUtil;
 import com.zzc.androidtrain.R;
 import com.zzc.androidtrain.util.ApkUtil;
 import com.zzc.androidtrain.util.Toaster;
@@ -68,12 +69,14 @@ public class ApkPatchActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             System.out.println("---合并增量包结束！开始安装----");
-            ApkUtil.installApk(getBaseContext(), NEW_VERSION_PATH);
+            if (integer == 0) {
+                ApkUtil.installApk(getBaseContext(), NEW_VERSION_PATH);
+            }
         }
 
         @Override
         protected Integer doInBackground(String... params) {
-            return new FileDiffer().fileCombine(params[0], params[1], params[2]);
+            return new PatchUpdateUtil().filePatch(getBaseContext(), params[0], params[1], params[2]);
         }
     }
 

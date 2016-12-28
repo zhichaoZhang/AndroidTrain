@@ -25,4 +25,10 @@
 
     </style>
 
+    <style name="LightLinearProgressDrawable" parent="Material.Drawable.LinearProgress.Determinate">
+        <item name="lpd_strokeSize">13dp</item>
+        <item name="lpd_strokeColor">@color/palette_orange</item>
+        <item name="lpd_strokeSecondaryColor">@color/palette_aluminium</item>
+    </style>
+
 </resources>

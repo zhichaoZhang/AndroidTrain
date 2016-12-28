@@ -1,6 +1,9 @@
 package com.zzc.androidtrain.util;
 
 import android.content.Context;
+import android.os.Environment;
+import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +17,15 @@ import java.io.OutputStream;
  * Created by zczhang on 16/4/10.
  */
 public class FileUtil {
+    private static final String TAG = "FileUtil";
+
+    public static String getRootPath() {
+        return Environment.getExternalStorageDirectory().getAbsolutePath();
+    }
+
+    public static String getAppPicDirPath() {
+        return getRootPath();
+    }
 
     public static boolean createDir(String path) {
         File file = new File(path);
@@ -21,6 +33,24 @@ public class FileUtil {
             return file.mkdirs();
         }
         return true;
+    }
+
+    public static File createFile(String filePath) {
+        if(TextUtils.isEmpty(filePath)) {
+            Log.e(TAG, "createFile: filePath = " + filePath);
+            return null;
+        }
+        File file = new File(filePath);
+        if(file.exists()) {
+            file.delete();
+        }
+        try {
+            file.createNewFile();
+            return file;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static boolean copyAssetFile2SdCard(Context context, String assetFileName, String sdcardPath) throws IOException {

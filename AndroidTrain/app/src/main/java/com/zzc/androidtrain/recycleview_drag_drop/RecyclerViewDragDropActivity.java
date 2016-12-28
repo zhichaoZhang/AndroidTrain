@@ -102,6 +102,9 @@ public class RecyclerViewDragDropActivity extends BaseActivity implements MainFr
                 Toaster.showShortToast(getBaseContext(),  "刷新");
                 ((RecyclerOperateListener)fragment).onRefresh();
                 break;
+            case R.id.action_add_height:
+                ((RecyclerOperateListener)fragment).onAddFirstItemHeight();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -110,5 +113,6 @@ public class RecyclerViewDragDropActivity extends BaseActivity implements MainFr
         void onAdd();
         void onDel();
         void onRefresh();
+        void onAddFirstItemHeight();
     }
 }

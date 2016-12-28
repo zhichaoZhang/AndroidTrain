@@ -10,4 +10,11 @@
     <style name="AppTheme.Material" parent="android:Theme.Material">
 
     </style>
+
+    <style name="AppTheme.NoActionBar.Transition">
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowSharedElementsUseOverlay">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+    </style>
 </resources>

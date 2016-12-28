@@ -13,10 +13,31 @@
             android:layout_height="44dp"
             android:gravity="center"
             android:text="返回" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="addWebFragment"
+            android:onClick="onClickAddWebFragment"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="addFragmentAtBottom"
+            android:onClick="onClickBottomFragment"
+            />
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <FrameLayout
+        android:id="@+id/fl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
 </LinearLayout>

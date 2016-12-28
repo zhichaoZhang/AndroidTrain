@@ -85,6 +85,16 @@
         <item>Eight</item>
         <item>Nine</item>
         <item>Ten</item>
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
     </array>
 
     <string name="pref_title_system_sync_settings">System sync settings</string>
@@ -143,5 +153,8 @@
     <string name="secure_message">Device is properly secured. Access is granted to secured content</string>
     <string name="device_admin_activation_message">Provide a message here explaining why an application needs to become a device administrator.</string>
     <string name="operate_origin">原图</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

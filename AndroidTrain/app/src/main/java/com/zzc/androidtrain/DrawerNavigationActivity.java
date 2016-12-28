@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -28,7 +27,6 @@ import android.transition.Fade;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,18 +38,24 @@ import android.widget.Toast;
 import com.zzc.androidtrain.apk_patch.ApkPatchActivity;
 import com.zzc.androidtrain.app.BaseActivity;
 import com.zzc.androidtrain.async.MyIntentService;
+import com.zzc.androidtrain.async.SystemDownLoadManager;
+import com.zzc.androidtrain.change_icon.ChangeAppIconActivity;
 import com.zzc.androidtrain.deviceadmin.DevicePolicySetupActivity;
 import com.zzc.androidtrain.fragment.FragmentActivity;
-import com.zzc.androidtrain.image_filter.ImageFilterActivity;
-import com.zzc.androidtrain.view.GridViewActivity;
 import com.zzc.androidtrain.hotfix.BugHotFixTestActivity;
+import com.zzc.androidtrain.image_filter.ImageFilterActivity;
 import com.zzc.androidtrain.jnitest.HelloJni;
 import com.zzc.androidtrain.net.HttpsTestActivity;
+import com.zzc.androidtrain.pic_compress.PicCompressActivity;
+import com.zzc.androidtrain.qrcode.QrcodeLibCompareActivity;
 import com.zzc.androidtrain.recycleview_drag_drop.RecyclerViewDragDropActivity;
 import com.zzc.androidtrain.renderscript.RenderScriptActivity;
+import com.zzc.androidtrain.transition.ListActivity;
 import com.zzc.androidtrain.tts.TTSActivity;
 import com.zzc.androidtrain.util.StatusBarUtil;
 import com.zzc.androidtrain.util.Toaster;
+import com.zzc.androidtrain.view.GridViewActivity;
+import com.zzc.androidtrain.view.refresh.PullToRefresh2;
 
 public class DrawerNavigationActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
@@ -94,7 +98,7 @@ public class DrawerNavigationActivity extends BaseActivity
 
         tvHello = (TextView) findViewById(R.id.tv_hello);
         rlRoot = (LinearLayout) findViewById(R.id.root);
-        btnFade = (Button)findViewById(R.id.btn_fade);
+        btnFade = (Button) findViewById(R.id.btn_fade);
 
         mIntentServiceIntentFilter = new IntentFilter(Constant.LocalBroadcast.BROADCAST_ACTION_MY_INTENT_SERVICE);
     }
@@ -221,12 +225,12 @@ public class DrawerNavigationActivity extends BaseActivity
     protected void setStatusBar() {
         int mStatusBarColor = getResources().getColor(R.color.colorPrimary);
         StatusBarUtil.setColorForDrawerLayout(this, (DrawerLayout) findViewById(R.id.drawer_layout), mStatusBarColor);
-    }   
+    }
 
     boolean tvVisible = true;
 
     public void onChangeScenesBtnClick(View view) {
-        if(tvVisible) {
+        if (tvVisible) {
             fadeOutTextView();
         } else {
             fadeInTextView();
@@ -330,10 +334,35 @@ public class DrawerNavigationActivity extends BaseActivity
         startActivity(ApkPatchActivity.getCallingIntent(this));
     }
 
+    public void onClickTestDownloadManager(View view) {
+        startActivity(SystemDownLoadManager.getCallingIntent(this));
+    }
+
+    public void onClickTransition(View view) {
+        startActivity(ListActivity.getCallingIntent(this));
+    }
+
+    public void onPullToRefresh(View view) {
+        startActivity(PullToRefresh2.getCallingIntent(this));
+    }
+
+    public void onClickQrcodeTestBtn(View view) {
+        startActivity(QrcodeLibCompareActivity.getCallingIntent(this));
+    }
+
+    public void onClickChangeAppIcon(View view) {
+        startActivity(ChangeAppIconActivity.getCallingIntent(this));
+    }
+
+    public void onClickPicCompress(View view) {
+        startActivity(PicCompressActivity.getCallingIntent(this));
+    }
+
     /**
      * 开启后台任务
-     *
+     * <p>
      * 使用LocalBroadcast接收处理结果数据
+     *
      * @param view
      */
     public void onNewIntentService(View view) {
@@ -345,7 +374,7 @@ public class DrawerNavigationActivity extends BaseActivity
         @Override
         public void onReceive(Context context, Intent intent) {
             String result = intent.getStringExtra(MyIntentService.EXTRA_RESULT);
-            Toaster.showLongToast(getBaseContext(), "任务完成:"+result);
+            Toaster.showLongToast(getBaseContext(), "任务完成:" + result);
         }
     }
 

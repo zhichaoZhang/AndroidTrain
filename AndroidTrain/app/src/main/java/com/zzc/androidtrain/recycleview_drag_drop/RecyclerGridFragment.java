@@ -84,4 +84,9 @@ public class RecyclerGridFragment extends Fragment implements OnStartDragListene
     public void onRefresh() {
 
     }
+
+    @Override
+    public void onAddFirstItemHeight() {
+
+    }
 }

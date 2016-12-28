@@ -54,6 +54,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     private Context mContext;
 
     public RecyclerListAdapter(Context context, OnStartDragListener dragStartListener) {
+        setHasStableIds(true);
         this.mContext = context;
         mDragStartListener = dragStartListener;
         mItems.addAll(Arrays.asList(context.getResources().getStringArray(R.array.dummy_items)));
@@ -94,6 +95,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        System.out.println("onCreateViewHolder");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
         ItemViewHolder itemViewHolder = new ItemViewHolder(view);
         return itemViewHolder;
@@ -102,7 +104,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     @Override
     public void onBindViewHolder(final ItemViewHolder holder, final int position) {
         holder.textView.setText(mItems.get(position));
-
+        System.out.println("holder.textView.toString()" + position + " = " + holder.textView.toString());
         // Start a drag whenever the handle view it touched
 //        holder.handleView.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
@@ -127,6 +129,8 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
             public void onClick(View v) {
                 if(onItemClickListener != null) {
                     onItemClickListener.onItemClick(holder.getAdapterPosition());
+                    System.out.println("position = " + position);
+                    System.out.println("adapterPosition = " + holder.getAdapterPosition());
 //                    onItemClickListener.onItemClick(position);
                 }
             }
@@ -149,6 +153,11 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     /**

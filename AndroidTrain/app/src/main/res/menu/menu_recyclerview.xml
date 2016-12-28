@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ViewPagerActivity">
     <item
+        android:id="@+id/action_add_height"
+        android:orderInCategory="100"
+        android:title="add height"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_add"
         android:orderInCategory="100"
         android:title="add"

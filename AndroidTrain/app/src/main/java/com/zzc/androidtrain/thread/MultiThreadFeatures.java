@@ -6,6 +6,8 @@ package com.zzc.androidtrain.thread;
  */
 public class MultiThreadFeatures {
     static boolean isRun = true;
+    static int num = 0;
+    static volatile boolean tag = false;
     int i = 0;
 
     public static void main(String[] args) {
@@ -18,14 +20,11 @@ public class MultiThreadFeatures {
             @Override
             public void run() {
                 super.run();
-                while (isRun) {
+                boolean threadTag = tag;
+                while (isRun || num == 0) {
                     i++;
-//                    System.out.println("i--->" + i);
-//                    try {
-//                        Thread.sleep(100);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    threadTag = tag;
+//                    System.out.println("thread: isRun = " + isRun);
                 }
             }
         };
@@ -36,19 +35,22 @@ public class MultiThreadFeatures {
             e.printStackTrace();
         }
 //        System.out.println("i---->" + i);
-        isRun = false;
-        System.out.println("isRun2--->" + isRun);
 
+        isRun = false;
+        num = 1;
+        tag = true;
+        System.out.println("isRun2--->" + isRun);
+        System.out.println("tag2--->" + tag);
 //        System.out.println("i---->" + i);
     }
-
-    public void syncBlockImpl() {
-        synchronized (this)  {
-            System.out.println("hello world");
-        }
-    }
-
-    public synchronized void syncMethodImpl() {
-        System.out.println("hello world");
-    }
+//
+//    public void syncBlockImpl() {
+//        synchronized (this)  {
+//            System.out.println("hello world");
+//        }
+//    }
+//
+//    public synchronized void syncMethodImpl() {
+//        System.out.println("hello world");
+//    }
 }

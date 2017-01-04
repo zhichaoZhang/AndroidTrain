@@ -12,8 +12,10 @@ import com.zzc.androidtrain.R;
 import com.zzc.androidtrain.app.BaseActivity;
 import com.zzc.androidtrain.app.BaseApplication;
 import com.zzc.androidtrain.app.BaseApplicationDelegate;
+import com.zzc.androidtrain.jnitest.HelloJni;
 import com.zzc.androidtrain.util.BugClassUtil;
 import com.zzc.androidtrain.util.FileUtil;
+import com.zzc.androidtrain.util.Toaster;
 
 import java.io.IOException;
 
@@ -33,13 +35,13 @@ public class BugHotFixTestActivity extends BaseActivity{
     }
 
     public void bugMethod() {
-//        Toast.makeText(this, "这是一个有bug的方法", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "这是一个有bug的方法", Toast.LENGTH_SHORT).show();
         System.out.println("this is one bug method in a bug class");
 
 //        startActivity(new Intent(this, DrawerNavigationActivity.class));
 
-        Toast.makeText(this, "这个有bug的方法已被修复", Toast.LENGTH_SHORT).show();
-        System.out.println("this bug method has been fixed");
+//        Toast.makeText(this, "这个有bug的方法已被修复", Toast.LENGTH_SHORT).show();
+//        System.out.println("this bug method has been fixed");
 //        new BugClassUtil().bugMethod(this);
     }
 
@@ -58,6 +60,15 @@ public class BugHotFixTestActivity extends BaseActivity{
     }
 
     public void onRestartBtnClick(View view) {
-        new BugClassUtil().bugMethod(this);
+        BugClassUtil.bugMethod(this);
+    }
+
+    public void onClickNativeMethod(View view) {
+        try {
+//            String strFromJni = new HelloJni().stringFromJni();
+//            Toaster.showShortToast(this, "调用一个native方法，返回值 = " + strFromJni);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

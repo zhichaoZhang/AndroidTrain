@@ -12,15 +12,8 @@ import com.tencent.tinker.loader.shareutil.ShareConstants;
  */
 
 public class BaseApplication extends TinkerApplication {
-    /**
-     * 修复的类dex文件存储路径
-     */
-    public String dirNewDex;
-
 
     public BaseApplication() {
         super(ShareConstants.TINKER_ENABLE_ALL, "com.zzc.androidtrain.app.BaseApplicationDelegate", "com.tencent.tinker.loader.TinkerLoader", false);
     }
-
-
 }

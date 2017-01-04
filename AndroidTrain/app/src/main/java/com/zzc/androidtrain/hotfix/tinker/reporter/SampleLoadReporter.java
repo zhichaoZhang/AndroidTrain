@@ -17,53 +17,33 @@
 package com.zzc.androidtrain.hotfix.tinker.reporter;
 
 import android.content.Context;
-import android.os.Handler;
 import android.os.Looper;
 import android.os.MessageQueue;
-import android.widget.Toast;
 
 import com.tencent.tinker.lib.reporter.DefaultLoadReporter;
-import com.tencent.tinker.lib.tinker.TinkerInstaller;
+import com.tencent.tinker.lib.util.TinkerLog;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
+import com.tencent.tinker.loader.shareutil.SharePatchFileUtil;
+import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
 import com.zzc.androidtrain.hotfix.tinker.utils.UpgradePatchRetry;
-import com.zzc.androidtrain.hotfix.tinker.utils.Utils;
 
 import java.io.File;
+
 
 /**
  * optional, you can just use DefaultLoadReporter
  * Created by zhangshaowen on 16/4/13.
  */
 public class SampleLoadReporter extends DefaultLoadReporter {
-    private Handler handler = new Handler();
+    private final static String TAG = "Tinker.SampleLoadReporter";
 
     public SampleLoadReporter(Context context) {
         super(context);
     }
 
     @Override
-    public void onLoadPatchListenerReceiveFail(final File patchFile, int errorCode, final boolean isUpgrade) {
-        super.onLoadPatchListenerReceiveFail(patchFile, errorCode, isUpgrade);
-        switch (errorCode) {
-            case ShareConstants.ERROR_PATCH_NOTEXIST:
-                Toast.makeText(context, "patch file is not exist", Toast.LENGTH_LONG).show();
-                break;
-            case ShareConstants.ERROR_PATCH_RUNNING:
-                // try later
-                // only retry for upgrade patch
-                if (isUpgrade) {
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            TinkerInstaller.onReceiveUpgradePatch(context, patchFile.getAbsolutePath());
-                        }
-                    }, 60 * 1000);
-                }
-                break;
-            case Utils.ERROR_PATCH_ROM_SPACE:
-                Toast.makeText(context, "rom space is not enough", Toast.LENGTH_LONG).show();
-                break;
-        }
+    public void onLoadPatchListenerReceiveFail(final File patchFile, int errorCode) {
+        super.onLoadPatchListenerReceiveFail(patchFile, errorCode);
         SampleTinkerReport.onTryApplyFail(errorCode);
     }
 
@@ -85,6 +65,17 @@ public class SampleLoadReporter extends DefaultLoadReporter {
     @Override
     public void onLoadException(Throwable e, int errorCode) {
         super.onLoadException(e, errorCode);
+        switch (errorCode) {
+            case ShareConstants.ERROR_LOAD_EXCEPTION_UNCAUGHT:
+                String uncaughtString = SharePatchFileUtil.checkTinkerLastUncaughtCrash(context);
+                if (!ShareTinkerInternals.isNullOrNil(uncaughtString)) {
+                    File laseCrashFile = SharePatchFileUtil.getPatchLastCrashFile(context);
+                    SharePatchFileUtil.safeDeleteFile(laseCrashFile);
+                    // found really crash reason
+                    TinkerLog.e(TAG, "tinker uncaught real exception:" + uncaughtString);
+                }
+                break;
+        }
         SampleTinkerReport.onLoadException(e, errorCode);
     }
 

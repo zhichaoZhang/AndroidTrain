@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
-LOCAL_MODULE := bsdiff
-LOCAL_SRC_FILES :=  bsdiff.c
+LOCAL_MODULE := jniTest
+LOCAL_SRC_FILES :=  test.cpp
 
 LOCAL_STATIC_LIBRARIES := \lbz2
 

@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tencent.tinker.lib.tinker.TinkerApplicationHelper;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.zzc.androidtrain.R;
 import com.zzc.androidtrain.app.BaseActivity;
 
@@ -25,7 +27,7 @@ public class HelloJni extends BaseActivity{
     TextView tvStringFromNative;
 
     static {
-        System.loadLibrary("jni-test");
+        System.loadLibrary("jniTest");
     }
 
     /**

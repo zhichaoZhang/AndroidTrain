@@ -54,6 +54,7 @@
             </intent-filter>
         </activity>
 
+
         <activity-alias
             android:name=".MainActivity2"
             android:enabled="false"

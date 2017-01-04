@@ -42,12 +42,12 @@ public class BaseApplicationDelegate extends DefaultApplicationLike {
         Log.e(TAG, "onBaseContextAttached: " + "Application 初始化 " + "ApplicationContext = " + getApplication().getApplicationContext());
 
         //加载Tinker差分包
-        SampleApplicationContext.application = getApplication();
-        SampleApplicationContext.context = getApplication();
-        TinkerManager.setTinkerApplicationLike(this);
-        TinkerManager.initFastCrashProtect();
+//        SampleApplicationContext.application = getApplication();
+//        SampleApplicationContext.context = getApplication();
+//        TinkerManager.setTinkerApplicationLike(this);
+//        TinkerManager.initFastCrashProtect();
         //should set before tinker is installed
-        TinkerManager.setUpgradeRetryEnable(true);
+//        TinkerManager.setUpgradeRetryEnable(true);
 
         //optional set logIml, or you can use default debug log
 //        TinkerInstaller.setLogIml(new MyLogImp());

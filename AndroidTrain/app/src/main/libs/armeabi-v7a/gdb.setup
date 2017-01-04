@@ -1,2 +1,0 @@
-set solib-search-path /Users/joye/develop/android/workspace/AndroidTrain/AndroidTrain/app/src/main/obj/local/armeabi-v7a
-directory /Users/joye/develop/android/tools/sdk/android-sdk/ndk-bundle/platforms/android-9/arch-arm/usr/include \ bzip2 /Users/joye/develop/android/workspace/AndroidTrain/AndroidTrain/app/src/main/jni /Users/joye/develop/android/tools/sdk/android-sdk/ndk-bundle/sources/cxx-stl/system

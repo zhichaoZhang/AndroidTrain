@@ -191,6 +191,8 @@
         </activity>
         <activity android:name=".change_icon.ChangeAppIconActivity">
         </activity>
+        <activity android:name=".anim.view_anim.QuadBezierAnimActivity">
+        </activity>
 
         <service
             android:name=".hotfix.tinker.service.SampleResultService"

@@ -35,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zzc.androidtrain.anim.view_anim.ViewAnimActivity;
 import com.zzc.androidtrain.apk_patch.ApkPatchActivity;
 import com.zzc.androidtrain.app.BaseActivity;
 import com.zzc.androidtrain.async.MyIntentService;
@@ -356,6 +357,10 @@ public class DrawerNavigationActivity extends BaseActivity
 
     public void onClickPicCompress(View view) {
         startActivity(PicCompressActivity.getCallingIntent(this));
+    }
+
+    public void onClickViewAnim(View view) {
+        startActivity(ViewAnimActivity.getCallingIntent(this));
     }
 
     /**

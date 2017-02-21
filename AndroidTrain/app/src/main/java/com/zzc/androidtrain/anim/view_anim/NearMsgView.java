@@ -12,9 +12,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 
 /**
  * 消息点动画
@@ -27,13 +26,13 @@ import android.view.animation.Interpolator;
 public class NearMsgView extends View {
     private static final String TAG = "NearMsgView";
     private static final double PIE = 3.1415936;
-    private static final int DEFAULT_CIRCLE_RADIUS = 10;//默认圆圈半径 dp
-    private static final int DEFAULT_TEXT_SIZE = 12;//默认字号sp
+    private static final int DEFAULT_CIRCLE_RADIUS = 7;//默认圆圈半径 dp
+    private static final int DEFAULT_TEXT_SIZE = 7;//默认字号sp
     private static final int DEFAULT_CIRCLE_COLOR = Color.RED;//默认圆圈背景色
     private static final int DEFAULT_TEXT_COLOR = Color.WHITE;//默认文件颜色
     private static final int DEFAULT_START_CIRCLE_RADIUS = 3;//默认起始位置圆圈半径 dp
-    private static final int DEFAULT_ANIM_DURATION = 700;//默认动画执行时长 ms
-    private static final Interpolator DEFAULT_ANIM_INTER = new AccelerateInterpolator();//默认动画执行的差值器
+    private static final int DEFAULT_ANIM_DURATION = 7000;//默认动画执行时长 ms
+    private static final Interpolator DEFAULT_ANIM_INTER = new LinearInterpolator();//默认动画执行的差值器
     private Context mContext = null;
     private int mFinalCircleRadius;//最终圆点半径
     private int mOriginCircleRadius;//起始点半径
@@ -86,6 +85,7 @@ public class NearMsgView extends View {
         mTextPaint.setColor(mTextColor);
         mTextPaint.setDither(true);
         mTextPaint.setFakeBoldText(true);
+        mTextPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mBezierPath = new Path();
     }
@@ -127,14 +127,14 @@ public class NearMsgView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (mFinalCircleRadius != 0) {
-            canvas.drawCircle(mStartPoint.x, mStartPoint.y, mFinalCircleRadius, mPaint);
-        }
-        if (mCircleRadius != 0 && mMidPoint.x != 0 && mMidPoint.y != 0) {
-            canvas.drawCircle(mMidPoint.x, mMidPoint.y, mCircleRadius, mPaint);
-        }
+//        if (mFinalCircleRadius != 0) {
+//            canvas.drawCircle(mStartPoint.x, mStartPoint.y, mFinalCircleRadius, mPaint);
+//        }
+//        if (mCircleRadius != 0 && mMidPoint.x != 0 && mMidPoint.y != 0) {
+//            canvas.drawCircle(mMidPoint.x, mMidPoint.y, mCircleRadius, mPaint);
+//        }
         canvas.drawPath(mBezierPath, mPaint);
-        paintText(canvas);
+//        paintText(canvas);
     }
 
     //画数字
@@ -156,6 +156,25 @@ public class NearMsgView extends View {
     }
 
     /**
+     * 获取正在显示的文本内容
+     *
+     * @return 文本
+     */
+    public String getText() {
+        return mText;
+    }
+
+    /**
+     * 刷新文本内容
+     *
+     * @param text 文本
+     */
+    public void refreshText(String text) {
+        setText(text);
+        refreshSelf();
+    }
+
+    /**
      * 显示此视图
      */
     public void show() {
@@ -166,7 +185,7 @@ public class NearMsgView extends View {
     /**
      * 是否已经显示
      *
-     * @return
+     * @return isShown
      */
     public boolean isShown() {
         return isShown;
@@ -181,9 +200,9 @@ public class NearMsgView extends View {
                 public void onAnimationUpdate(ValueAnimator animation) {
                     int tempRadius = (int) animation.getAnimatedValue();
                     float animFaction = animation.getAnimatedFraction();
-                    updateCircleProperty(tempRadius, animFaction);
-                    updateTextSize(animFaction);
-                    refreshSelf();
+                    NearMsgView.this.updateCircleProperty(tempRadius, animFaction);
+                    NearMsgView.this.updateTextSize(animFaction);
+                    NearMsgView.this.refreshSelf();
                 }
             });
             mTransitionAnimator.addListener(new Animator.AnimatorListener() {
@@ -232,11 +251,11 @@ public class NearMsgView extends View {
         int endY = mEndPoint.y;
         mMidPoint.x = (int) (startX + faction * (endX - startX));
         mMidPoint.y = (int) (startY + faction * (endY - startY));
-        calculateBezierPath(mMidPoint);
+        calculateBezierPath(radius, mMidPoint);
     }
 
     //计算上下两条曲线
-    private void calculateBezierPath(Point midPoint) {
+    private void calculateBezierPath(int radius, Point midPoint) {
         //起点
         Point upPointStart = new Point();
         Point downPointStart = new Point();
@@ -249,11 +268,20 @@ public class NearMsgView extends View {
         //终点
         Point upPointEnd = new Point();
         Point downPointEnd = new Point();
-        double endCos45Len = mOriginCircleRadius * Math.cos(toRadians(45));
+        double endCos45Len = (mFinalCircleRadius - radius) * Math.cos(toRadians(45));
         upPointEnd.x = (int) (midPoint.x - endCos45Len);
         upPointEnd.y = (int) (midPoint.y - endCos45Len);
         downPointEnd.x = (int) (midPoint.x + endCos45Len);
         downPointEnd.y = (int) (midPoint.y + endCos45Len);
+        Log.d(TAG, "calculateBezierPath: upPointEnd = " + upPointEnd);
+        Log.d(TAG, "calculateBezierPath: downPointEnd = " + downPointEnd);
+
+        //当两个终点相当接近时，粘滞部分与移动的圆脱离
+        if (Math.abs(downPointEnd.x - upPointEnd.x) < 7) {
+            return;
+        } else {
+            clearBezierPath();
+        }
 
         //控制点 取两个圆的圆心连线的中点
         Point controlPoint = new Point();
@@ -263,10 +291,20 @@ public class NearMsgView extends View {
         mBezierPath.moveTo(upPointStart.x, upPointStart.y);
         mBezierPath.quadTo(controlPoint.x, controlPoint.y, upPointEnd.x, upPointEnd.y);
 
-        mBezierPath.lineTo(downPointEnd.x, downPointEnd.y);
+//        mBezierPath.lineTo(downPointEnd.x, downPointEnd.y);
+        contactDoubleEndPoint(mBezierPath, upPointEnd, downPointEnd);
+
         mBezierPath.quadTo(controlPoint.x, controlPoint.y, downPointStart.x, downPointStart.y);
 
         mBezierPath.close();
+    }
+
+    private void contactDoubleEndPoint(Path mBezierPath, Point upPointEnd, Point downPointEnd) {
+//        RectF arcRect = new RectF(upPointEnd.x, upPointEnd.y, downPointEnd.x, downPointEnd.y);
+//        mBezierPath.arcTo(arcRect, -135f, 45f);
+//        mBezierPath.addCircle();
+
+        mBezierPath.lineTo(downPointEnd.x, downPointEnd.y);
     }
 
     /**
@@ -281,5 +319,11 @@ public class NearMsgView extends View {
 
     private void clearBezierPath() {
         mBezierPath.reset();
+    }
+
+    public void hide() {
+        clearBezierPath();
+        mMidPoint.set(0, 0);
+        refreshSelf();
     }
 }

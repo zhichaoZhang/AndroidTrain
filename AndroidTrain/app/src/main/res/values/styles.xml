@@ -31,4 +31,13 @@
         <item name="lpd_strokeSecondaryColor">@color/palette_aluminium</item>
     </style>
 
+    <declare-styleable name="NotifyPointView">
+        <attr name="npv_point_color" format="color"/>
+        <attr name="npv_point_radius" format="dimension|integer"/>
+        <attr name="npv_text_color" format="color"/>
+        <attr name="npv_text_size" format="dimension|integer"/>
+        <attr name="npv_anim_duration" format="dimension|integer|reference"/>
+        <attr name="npv_rotate" format="float|dimension"/>
+    </declare-styleable>
+
 </resources>

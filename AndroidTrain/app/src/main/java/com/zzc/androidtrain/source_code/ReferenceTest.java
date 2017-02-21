@@ -34,20 +34,7 @@ public class ReferenceTest {
     static class VeryBig {
         private static final int SIZE = 10000;
         private long[] la = new long[SIZE];
-        private String ident;enceQueue<>();
-
-        public static void checkQueue() {
-            Reference<? extends VeryBig> inq = referenceQueue.poll();
-            if (inq != null) {
-                System.out.println("Reference type : " + inq.getClass().getSimpleName());
-                System.out.println("In Queue: " + inq.get());
-            }
-        }
-
-        static class VeryBig {
-            private static final int SIZE = 10000;
-            private long[] la = new long[SIZE];
-            private String ident;
+        private String ident;
 
         public VeryBig(String id) {
             this.ident = id;

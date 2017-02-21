@@ -17,6 +17,8 @@ import com.zzc.androidtrain.app.BaseActivity;
 
 public class QuadBezierAnimActivity extends BaseActivity{
     NearMsgView mView;
+    BezierPointFloatUpView bezierPointFloatUpView;
+    NotifyPointView notifyPointView;
 
 
     public static Intent getCallingIntent(Context context) {
@@ -30,10 +32,20 @@ public class QuadBezierAnimActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bezier_anim);
         mView = (NearMsgView)findViewById(R.id.view_near_msg);
+        bezierPointFloatUpView = (BezierPointFloatUpView)findViewById(R.id.bezier_anim_view);
+        notifyPointView = (NotifyPointView)findViewById(R.id.notify_point_view);
     }
 
     public void onClickStartBtn(View view) {
         mView.setText("10");
         mView.show();
+    }
+
+    public void onClickStartBtn2(View view) {
+        notifyPointView.show("10");
+    }
+
+    public void onClickPauseAnimBtn(View view) {
+        notifyPointView.stopAnim();
     }
 }
